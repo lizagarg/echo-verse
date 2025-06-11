@@ -23,8 +23,8 @@ userRouter.post('/signup', async(c) => {
   const prisma= new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate())
-
   try{
+        try{
 
     const user= await prisma.user.create({
       data:{
@@ -42,6 +42,13 @@ userRouter.post('/signup', async(c) => {
     c.status(411);
     return c.text('User already exists with this email');
   }
+  }
+  catch(e) {
+    c.status(500);
+    return c.text('Database connection error');
+  }
+
+  
 })
 
 
