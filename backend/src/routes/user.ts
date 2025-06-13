@@ -34,7 +34,8 @@ userRouter.post('/signup', async(c) => {
       }
     })
     const jwt= await sign({
-      id:user.id
+      id:user.id,
+      name: user.name
     },c.env.JWT_SECRET)
 
     return c.text(jwt);
@@ -77,6 +78,6 @@ userRouter.post('/signin', async (c) => {
 		return c.json({ error: "user not found" });
 	}
 
-	const jwt = await sign({ id: user.id }, c.env.JWT_SECRET);
+	const jwt = await sign({ id: user.id, name: user.name }, c.env.JWT_SECRET);
 	return c.json({ jwt });
 })

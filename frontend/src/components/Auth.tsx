@@ -19,9 +19,10 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         )
         const jwt= response.data;
         localStorage.setItem("token", jwt);
-        navigate("/blog")
+        navigate("/blogs")
         } catch(e) {
             //alert user that the request failed
+            alert("Request failed");
         }
     }
     return <div className="h-screen flex justify-center flex-col">
